@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment variables - never commit these
+.env
+
+# SQLite database file
+data/
+database.sqlite
+database.sqlite-shm
+database.sqlite-wal
+
+# Temp/test scripts
+test_sqlite.js
+test_sqlite2.js
+test_sqlite3.js
+find_dups.js
+add_emojis.js
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
