@@ -8,7 +8,7 @@ module.exports = {
         const emojis = interaction.guild.emojis.cache;
 
         if (emojis.size === 0) {
-            return interaction.reply({ content: 'This server has no custom emojis.', ephemeral: true });
+            return interaction.reply({ content: 'This server has no custom emojis.', flags: ['Ephemeral'] });
         }
 
         const emojiList = emojis.map(e => `${e} | \`:${e.name}:\``).join('\n');

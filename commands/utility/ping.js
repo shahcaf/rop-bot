@@ -6,7 +6,7 @@ module.exports = {
         .setName('ping')
         .setDescription('Check the bot\'s latency.'),
     async execute(interaction, client) {
-        const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true, ephemeral: true });
+        const sent = await interaction.reply({ content: 'Pinging...', fetchReply: true, flags: ['Ephemeral'] });
         
         const embed = new EmbedBuilder()
             .setColor(0x00FF00)

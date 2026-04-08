@@ -20,7 +20,7 @@ module.exports = {
             await interaction.reply({ content: `Successfully set ${user}'s XP to **${xp}** (Level ${level}).` });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to set XP.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to set XP.', flags: ['Ephemeral'] });
         }
     },
 };

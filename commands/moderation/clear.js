@@ -15,7 +15,7 @@ module.exports = {
     async execute(interaction, client) {
         const total = interaction.options.getInteger('amount');
 
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: ['Ephemeral'] });
 
         const fourteenDaysAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
         let deletedCount = 0;

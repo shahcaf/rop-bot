@@ -13,7 +13,7 @@ module.exports = {
         const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
         if (!member) {
-            return interaction.reply({ content: 'That user is not in the server.', ephemeral: true });
+            return interaction.reply({ content: 'That user is not in the server.', flags: ['Ephemeral'] });
         }
 
         try {
@@ -32,7 +32,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to untimeout the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to untimeout the user.', flags: ['Ephemeral'] });
         }
     },
 };

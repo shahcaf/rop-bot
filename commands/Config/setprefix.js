@@ -15,9 +15,9 @@ module.exports = {
             // I'll need to add the column if it's not there, but for now I'll just skip 
             // the database save or use a generic 'prefix' field if I had added it.
             // Let's assume we want to support it.
-            await interaction.reply({ content: `Prefix set to \`${prefix}\` (Note: Slash commands are always available).`, ephemeral: true });
+            await interaction.reply({ content: `Prefix set to \`${prefix}\` (Note: Slash commands are always available).`, flags: ['Ephemeral'] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to update prefix.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to update prefix.', flags: ['Ephemeral'] });
         }
     },
 };

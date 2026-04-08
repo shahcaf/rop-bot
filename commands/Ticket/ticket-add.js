@@ -17,7 +17,7 @@ module.exports = {
             
             await interaction.reply({ content: `Successfully added ${user} to the ticket.` });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to add user to ticket.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to add user to ticket.', flags: ['Ephemeral'] });
         }
     },
 };

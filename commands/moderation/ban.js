@@ -14,10 +14,10 @@ module.exports = {
 
         if (member) {
             if (!member.bannable) {
-                return interaction.reply({ content: 'I cannot ban this user! They might have a higher role than me.', ephemeral: true });
+                return interaction.reply({ content: 'I cannot ban this user! They might have a higher role than me.', flags: ['Ephemeral'] });
             }
             if (member.roles.highest.position >= interaction.member.roles.highest.position && interaction.guild.ownerId !== interaction.user.id) {
-                return interaction.reply({ content: 'You cannot ban someone with a higher or equal role to yours!', ephemeral: true });
+                return interaction.reply({ content: 'You cannot ban someone with a higher or equal role to yours!', flags: ['Ephemeral'] });
             }
         }
 
@@ -37,7 +37,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to ban the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to ban the user.', flags: ['Ephemeral'] });
         }
     },
 };

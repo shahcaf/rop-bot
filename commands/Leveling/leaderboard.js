@@ -10,7 +10,7 @@ module.exports = {
             const res = await query('SELECT * FROM levels WHERE guild_id = $1 ORDER BY xp DESC LIMIT 10', [interaction.guildId]);
             
             if (res.rows.length === 0) {
-                return interaction.reply({ content: 'No one has earned XP in this server yet.', ephemeral: true });
+                return interaction.reply({ content: 'No one has earned XP in this server yet.', flags: ['Ephemeral'] });
             }
 
             const embed = new EmbedBuilder()
@@ -22,7 +22,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to fetch leaderboard.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to fetch leaderboard.', flags: ['Ephemeral'] });
         }
     },
 };

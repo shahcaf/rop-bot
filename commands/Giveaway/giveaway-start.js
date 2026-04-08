@@ -16,7 +16,7 @@ module.exports = {
         const prize = interaction.options.getString('prize');
 
         const duration = ms(durationStr);
-        if (!duration) return interaction.reply({ content: 'Invalid duration!', ephemeral: true });
+        if (!duration) return interaction.reply({ content: 'Invalid duration!', flags: ['Ephemeral'] });
 
         const endAt = new Date(Date.now() + duration);
 

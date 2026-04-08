@@ -17,7 +17,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to unlock the channel.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to unlock the channel.', flags: ['Ephemeral'] });
         }
     },
 };

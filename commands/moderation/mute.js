@@ -12,7 +12,7 @@ module.exports = {
         const reason = interaction.options.getString('reason') ?? 'No reason provided';
         const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
-        if (!member) return interaction.reply({ content: 'Member not found.', ephemeral: true });
+        if (!member) return interaction.reply({ content: 'Member not found.', flags: ['Ephemeral'] });
 
         let muteRole = interaction.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted');
 
@@ -32,12 +32,12 @@ module.exports = {
                     }).catch(() => {});
                 });
             } catch (error) {
-                return interaction.reply({ content: 'Failed to create a Muted role.', ephemeral: true });
+                return interaction.reply({ content: 'Failed to create a Muted role.', flags: ['Ephemeral'] });
             }
         }
 
         if (member.roles.cache.has(muteRole.id)) {
-            return interaction.reply({ content: 'User is already muted.', ephemeral: true });
+            return interaction.reply({ content: 'User is already muted.', flags: ['Ephemeral'] });
         }
 
         try {
@@ -55,7 +55,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to mute the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to mute the user.', flags: ['Ephemeral'] });
         }
     },
 };

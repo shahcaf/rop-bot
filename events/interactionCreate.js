@@ -33,7 +33,7 @@ module.exports = {
                     return await interaction.update({ embeds: [embed] });
                 } catch (error) {
                     logger.error('Error generating help menu:', error);
-                    return await interaction.reply({ content: 'An error occurred while loading this category.', ephemeral: true });
+                    return await interaction.reply({ content: 'An error occurred while loading this category.', flags: ['Ephemeral'] });
                 }
             }
         }
@@ -80,16 +80,16 @@ module.exports = {
                         );
 
                     await channel.send({ embeds: [embed], components: [row] });
-                    return await interaction.reply({ content: `Ticket created: ${channel}`, ephemeral: true });
+                    return await interaction.reply({ content: `Ticket created: ${channel}`, flags: ['Ephemeral'] });
                 } catch (error) {
                     logger.error('Error creating ticket:', error);
-                    return await interaction.reply({ content: 'Failed to create the ticket.', ephemeral: true });
+                    return await interaction.reply({ content: 'Failed to create the ticket.', flags: ['Ephemeral'] });
                 }
             }
             
             if (interaction.customId === 'ticket_claim') {
                 if (!interaction.memberPermissions.has(require('discord.js').PermissionFlagsBits.ManageMessages)) {
-                    return await interaction.reply({ content: 'You do not have permission to claim tickets.', ephemeral: true });
+                    return await interaction.reply({ content: 'You do not have permission to claim tickets.', flags: ['Ephemeral'] });
                 }
                 
                 try {
@@ -144,25 +144,25 @@ module.exports = {
                     const res = await query('SELECT verify_role FROM guild_settings WHERE guild_id = $1', [interaction.guildId]);
                     
                     if (res.rows.length === 0 || !res.rows[0].verify_role) {
-                        return await interaction.reply({ content: 'The server administrator has not set up a verification role yet.', ephemeral: true });
+                        return await interaction.reply({ content: 'The server administrator has not set up a verification role yet.', flags: ['Ephemeral'] });
                     }
                     
                     const roleId = res.rows[0].verify_role;
                     const role = interaction.guild.roles.cache.get(roleId);
                     
                     if (!role) {
-                        return await interaction.reply({ content: 'The configured verification role no longer exists.', ephemeral: true });
+                        return await interaction.reply({ content: 'The configured verification role no longer exists.', flags: ['Ephemeral'] });
                     }
                     
                     if (interaction.member.roles.cache.has(roleId)) {
-                        return await interaction.reply({ content: 'You are already verified!', ephemeral: true });
+                        return await interaction.reply({ content: 'You are already verified!', flags: ['Ephemeral'] });
                     }
                     
                     await interaction.member.roles.add(role);
-                    return await interaction.reply({ content: '✅ You have been successfully verified!', ephemeral: true });
+                    return await interaction.reply({ content: '✅ You have been successfully verified!', flags: ['Ephemeral'] });
                 } catch (error) {
                     logger.error('Verification error:', error);
-                    return await interaction.reply({ content: 'An error occurred while verifying you.', ephemeral: true });
+                    return await interaction.reply({ content: 'An error occurred while verifying you.', flags: ['Ephemeral'] });
                 }
             }
         }
@@ -194,7 +194,7 @@ module.exports = {
                 const expiredTimestamp = Math.round(expirationTime / 1000);
                 return interaction.reply({ 
                     content: `Please wait, you are on a cooldown for \`${command.data.name}\`. You can use it again <t:${expiredTimestamp}:R>.`, 
-                    ephemeral: true 
+                    flags: ['Ephemeral'] 
                 });
             }
         }
@@ -215,9 +215,9 @@ module.exports = {
                 .setFooter({ text: 'If this persists, contact the bot owner.' });
 
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ embeds: [errorEmbed], ephemeral: true });
+                await interaction.followUp({ embeds: [errorEmbed], flags: ['Ephemeral'] });
             } else {
-                await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
+                await interaction.reply({ embeds: [errorEmbed], flags: ['Ephemeral'] });
             }
         }
     },

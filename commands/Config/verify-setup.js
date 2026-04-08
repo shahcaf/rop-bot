@@ -19,7 +19,7 @@ module.exports = {
                 [interaction.guildId, role.id]);
         } catch (error) {
             console.error('Failed to configure verify role:', error);
-            return interaction.reply({ content: 'Failed to update configuration.', ephemeral: true });
+            return interaction.reply({ content: 'Failed to update configuration.', flags: ['Ephemeral'] });
         }
 
         const embed = new EmbedBuilder()
@@ -38,6 +38,6 @@ module.exports = {
             );
 
         await interaction.channel.send({ embeds: [embed], components: [row] });
-        return await interaction.reply({ content: `Verification panel successfully set up and tied to ${role}!`, ephemeral: true });
+        return await interaction.reply({ content: `Verification panel successfully set up and tied to ${role}!`, flags: ['Ephemeral'] });
     },
 };

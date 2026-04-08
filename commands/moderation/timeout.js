@@ -16,16 +16,16 @@ module.exports = {
         const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
         if (!member) {
-            return interaction.reply({ content: 'That user is not in the server.', ephemeral: true });
+            return interaction.reply({ content: 'That user is not in the server.', flags: ['Ephemeral'] });
         }
 
         const duration = ms(durationStr);
         if (!duration || duration < 10000 || duration > 2419200000) { // Discord limit: 28 days
-            return interaction.reply({ content: 'Invalid duration! Use format like 10m, 1h, etc. Minimum is 10s and maximum is 28d.', ephemeral: true });
+            return interaction.reply({ content: 'Invalid duration! Use format like 10m, 1h, etc. Minimum is 10s and maximum is 28d.', flags: ['Ephemeral'] });
         }
 
         if (member.roles.highest.position >= interaction.member.roles.highest.position && interaction.guild.ownerId !== interaction.user.id) {
-            return interaction.reply({ content: 'You cannot timeout someone with a higher or equal role to yours!', ephemeral: true });
+            return interaction.reply({ content: 'You cannot timeout someone with a higher or equal role to yours!', flags: ['Ephemeral'] });
         }
 
         try {
@@ -45,7 +45,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to timeout the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to timeout the user.', flags: ['Ephemeral'] });
         }
     },
 };

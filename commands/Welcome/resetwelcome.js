@@ -20,7 +20,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to reset settings.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to reset settings.', flags: ['Ephemeral'] });
         }
     },
 };

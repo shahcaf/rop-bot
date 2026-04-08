@@ -3,7 +3,15 @@ require('dotenv').config();
 const { loadEvents } = require('./handlers/eventHandler');
 const { loadCommands } = require('./handlers/commandHandler');
 const logger = require('./utils/logger');
+const http = require('http');
 
+// Render requires a port to be bound for Web Services to confirm it's healthy
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Bot is running gracefully!');
+}).listen(process.env.PORT || 3000, '0.0.0.0', () => {
+    logger.info(`Dummy web server listening on port ${process.env.PORT || 3000} to satisfy Render's port scan.`);
+});
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,

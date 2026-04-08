@@ -12,7 +12,7 @@ module.exports = {
             await interaction.channel.permissionOverwrites.delete(user);
             await interaction.reply({ content: `Successfully removed ${user} from the ticket.` });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to remove user from ticket.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to remove user from ticket.', flags: ['Ephemeral'] });
         }
     },
 };

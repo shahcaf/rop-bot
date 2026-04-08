@@ -29,6 +29,6 @@ module.exports = {
             );
 
         await interaction.channel.send({ embeds: [embed], components: [row] });
-        await interaction.reply({ content: 'Ticket system setup successfully!', ephemeral: true });
+        await interaction.reply({ content: 'Ticket system setup successfully!', flags: ['Ephemeral'] });
     },
 };

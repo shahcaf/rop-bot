@@ -29,7 +29,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to issue warning.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to issue warning.', flags: ['Ephemeral'] });
         }
     },
 };

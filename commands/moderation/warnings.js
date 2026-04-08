@@ -15,7 +15,7 @@ module.exports = {
                 [interaction.guildId, user.id]);
             
             if (res.rows.length === 0) {
-                return interaction.reply({ content: `${user.tag} has no warnings.`, ephemeral: true });
+                return interaction.reply({ content: `${user.tag} has no warnings.`, flags: ['Ephemeral'] });
             }
 
             const embed = new EmbedBuilder()
@@ -27,7 +27,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to fetch warnings.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to fetch warnings.', flags: ['Ephemeral'] });
         }
     },
 };

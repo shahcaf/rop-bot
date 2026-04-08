@@ -13,12 +13,12 @@ module.exports = {
 
         if (durationStr.toLowerCase() !== 'off') {
             const msTime = ms(durationStr);
-            if (!msTime) return interaction.reply({ content: 'Invalid duration!', ephemeral: true });
+            if (!msTime) return interaction.reply({ content: 'Invalid duration!', flags: ['Ephemeral'] });
             seconds = Math.floor(msTime / 1000);
         }
 
         if (seconds < 0 || seconds > 21600) {
-            return interaction.reply({ content: 'Duration must be between 0s and 6h.', ephemeral: true });
+            return interaction.reply({ content: 'Duration must be between 0s and 6h.', flags: ['Ephemeral'] });
         }
 
         try {
@@ -32,7 +32,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to set slowmode.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to set slowmode.', flags: ['Ephemeral'] });
         }
     },
 };

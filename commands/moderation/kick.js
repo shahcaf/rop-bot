@@ -13,15 +13,15 @@ module.exports = {
         const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
         if (!member) {
-            return interaction.reply({ content: 'That user is not in the server.', ephemeral: true });
+            return interaction.reply({ content: 'That user is not in the server.', flags: ['Ephemeral'] });
         }
 
         if (!member.kickable) {
-            return interaction.reply({ content: 'I cannot kick this user! They might have a higher role than me.', ephemeral: true });
+            return interaction.reply({ content: 'I cannot kick this user! They might have a higher role than me.', flags: ['Ephemeral'] });
         }
         
         if (member.roles.highest.position >= interaction.member.roles.highest.position && interaction.guild.ownerId !== interaction.user.id) {
-            return interaction.reply({ content: 'You cannot kick someone with a higher or equal role to yours!', ephemeral: true });
+            return interaction.reply({ content: 'You cannot kick someone with a higher or equal role to yours!', flags: ['Ephemeral'] });
         }
 
         try {
@@ -40,7 +40,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to kick the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to kick the user.', flags: ['Ephemeral'] });
         }
     },
 };

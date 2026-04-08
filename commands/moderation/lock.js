@@ -17,7 +17,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to lock the channel.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to lock the channel.', flags: ['Ephemeral'] });
         }
     },
 };

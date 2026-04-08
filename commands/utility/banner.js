@@ -10,7 +10,7 @@ module.exports = {
         const fullUser = await client.users.fetch(user.id, { force: true });
 
         if (!fullUser.bannerURL()) {
-            return interaction.reply({ content: `${user.tag} doesn't have a banner!`, ephemeral: true });
+            return interaction.reply({ content: `${user.tag} doesn't have a banner!`, flags: ['Ephemeral'] });
         }
 
         const embed = new EmbedBuilder()

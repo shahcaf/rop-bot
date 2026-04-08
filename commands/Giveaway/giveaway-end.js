@@ -12,14 +12,14 @@ module.exports = {
 
         try {
             const res = await query('SELECT * FROM giveaways WHERE message_id = $1 AND ended = FALSE', [messageId]);
-            if (res.rows.length === 0) return interaction.reply({ content: 'Giveaway not found or already ended.', ephemeral: true });
+            if (res.rows.length === 0) return interaction.reply({ content: 'Giveaway not found or already ended.', flags: ['Ephemeral'] });
 
             const giveaway = res.rows[0];
             const channel = await client.channels.fetch(giveaway.channel_id).catch(() => null);
-            if (!channel) return interaction.reply({ content: 'Channel not found.', ephemeral: true });
+            if (!channel) return interaction.reply({ content: 'Channel not found.', flags: ['Ephemeral'] });
 
             const message = await channel.messages.fetch(giveaway.message_id).catch(() => null);
-            if (!message) return interaction.reply({ content: 'Message not found.', ephemeral: true });
+            if (!message) return interaction.reply({ content: 'Message not found.', flags: ['Ephemeral'] });
 
             const reaction = message.reactions.cache.get('🎉');
             const users = await reaction.users.fetch();
@@ -43,11 +43,11 @@ module.exports = {
 
             await message.edit({ embeds: [endEmbed] });
             await channel.send(`Congratulations ${winnerMentions}! You won **${giveaway.prize}**!`);
-            await interaction.reply({ content: 'Giveaway ended!', ephemeral: true });
+            await interaction.reply({ content: 'Giveaway ended!', flags: ['Ephemeral'] });
 
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to end giveaway.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to end giveaway.', flags: ['Ephemeral'] });
         }
     },
 };

@@ -9,11 +9,11 @@ module.exports = {
         const res = await query('SELECT * FROM tickets WHERE channel_id = $1', [interaction.channelId]);
         
         if (res.rows.length === 0) {
-            return interaction.reply({ content: 'This is not a ticket channel.', ephemeral: true });
+            return interaction.reply({ content: 'This is not a ticket channel.', flags: ['Ephemeral'] });
         }
 
         if (res.rows[0].claimer_id) {
-            return interaction.reply({ content: `This ticket is already claimed by <@${res.rows[0].claimer_id}>.`, ephemeral: true });
+            return interaction.reply({ content: `This ticket is already claimed by <@${res.rows[0].claimer_id}>.`, flags: ['Ephemeral'] });
         }
 
         try {
@@ -28,7 +28,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to claim ticket.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to claim ticket.', flags: ['Ephemeral'] });
         }
     },
 };

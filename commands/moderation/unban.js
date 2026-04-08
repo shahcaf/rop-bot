@@ -26,7 +26,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to unban the user. Make sure the ID is correct and they are actually banned.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to unban the user. Make sure the ID is correct and they are actually banned.', flags: ['Ephemeral'] });
         }
     },
 };

@@ -13,7 +13,7 @@ module.exports = {
             const res = await query('SELECT * FROM levels WHERE guild_id = $1 AND user_id = $2', [interaction.guildId, user.id]);
             
             if (res.rows.length === 0) {
-                return interaction.reply({ content: user.id === interaction.user.id ? 'You haven\'t earned any XP yet!' : `${user.tag} hasn't earned any XP yet.`, ephemeral: true });
+                return interaction.reply({ content: user.id === interaction.user.id ? 'You haven\'t earned any XP yet!' : `${user.tag} hasn't earned any XP yet.`, flags: ['Ephemeral'] });
             }
 
             const { xp, level } = res.rows[0];
@@ -32,7 +32,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to fetch rank.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to fetch rank.', flags: ['Ephemeral'] });
         }
     },
 };

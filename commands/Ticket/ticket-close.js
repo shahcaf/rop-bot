@@ -9,7 +9,7 @@ module.exports = {
         const res = await query('SELECT * FROM tickets WHERE channel_id = $1', [interaction.channelId]);
         
         if (res.rows.length === 0) {
-            return interaction.reply({ content: 'This is not a ticket channel.', ephemeral: true });
+            return interaction.reply({ content: 'This is not a ticket channel.', flags: ['Ephemeral'] });
         }
 
         await interaction.reply({ content: 'Closing ticket in 5 seconds...' });

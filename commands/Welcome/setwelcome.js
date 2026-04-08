@@ -25,7 +25,7 @@ module.exports = {
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Failed to update configuration.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to update configuration.', flags: ['Ephemeral'] });
         }
     },
 };

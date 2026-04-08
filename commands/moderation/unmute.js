@@ -10,12 +10,12 @@ module.exports = {
         const user = interaction.options.getUser('target');
         const member = await interaction.guild.members.fetch(user.id).catch(() => null);
 
-        if (!member) return interaction.reply({ content: 'Member not found.', ephemeral: true });
+        if (!member) return interaction.reply({ content: 'Member not found.', flags: ['Ephemeral'] });
 
         const muteRole = interaction.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted');
 
         if (!muteRole || !member.roles.cache.has(muteRole.id)) {
-            return interaction.reply({ content: 'User is not muted.', ephemeral: true });
+            return interaction.reply({ content: 'User is not muted.', flags: ['Ephemeral'] });
         }
 
         try {
@@ -32,7 +32,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed] });
         } catch (error) {
-            await interaction.reply({ content: 'Failed to unmute the user.', ephemeral: true });
+            await interaction.reply({ content: 'Failed to unmute the user.', flags: ['Ephemeral'] });
         }
     },
 };
