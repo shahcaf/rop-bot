@@ -41,17 +41,28 @@ module.exports = {
         if (interaction.isButton()) {
             if (interaction.customId.startsWith('ticket_open_')) {
                 try {
-                    const categoryId = interaction.customId.replace('ticket_open_', '');
+                    const parts = interaction.customId.split('_');
+                    const categoryId = parts[2];
+                    const supportRoleId = parts[3]; // Might be undefined
                     const category = interaction.guild.channels.cache.get(categoryId);
                     
+                    const permissionOverwrites = [
+                        { id: interaction.guild.roles.everyone, deny: [require('discord.js').PermissionFlagsBits.ViewChannel] },
+                        { id: interaction.user.id, allow: [require('discord.js').PermissionFlagsBits.ViewChannel, require('discord.js').PermissionFlagsBits.SendMessages, require('discord.js').PermissionFlagsBits.ReadMessageHistory] }
+                    ];
+
+                    if (supportRoleId) {
+                        permissionOverwrites.push({
+                            id: supportRoleId,
+                            allow: [require('discord.js').PermissionFlagsBits.ViewChannel, require('discord.js').PermissionFlagsBits.SendMessages, require('discord.js').PermissionFlagsBits.ReadMessageHistory]
+                        });
+                    }
+
                     const channel = await interaction.guild.channels.create({
                         name: `ticket-${interaction.user.username}`,
                         type: require('discord.js').ChannelType.GuildText,
                         parent: category,
-                        permissionOverwrites: [
-                            { id: interaction.guild.roles.everyone, deny: [require('discord.js').PermissionFlagsBits.ViewChannel] },
-                            { id: interaction.user.id, allow: [require('discord.js').PermissionFlagsBits.ViewChannel, require('discord.js').PermissionFlagsBits.SendMessages, require('discord.js').PermissionFlagsBits.ReadMessageHistory] }
-                        ]
+                        permissionOverwrites: permissionOverwrites
                     });
 
                     const { query } = require('../database/connection');
